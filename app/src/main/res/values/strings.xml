@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SearchView-MySQL</string>
+    <string name="search">Search</string>
+    <string name="type_name">Type Name</string>
+</resources>
