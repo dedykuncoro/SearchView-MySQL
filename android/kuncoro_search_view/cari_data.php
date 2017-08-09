@@ -6,20 +6,27 @@
 
 	$query = mysqli_query($con, "SELECT * FROM biodata WHERE nama LIKE '%".$nama."%'");
 
-	$json = '{"results": [';
+	$num_rows = mysqli_num_rows($query);
 
-	while ($row = mysqli_fetch_array($query)){
-		$char ='"';
+	if ($num_rows > 0){
+		$json = '{"value":1, "results": [';
 
-		$json .= '{
-			"id": "'.str_replace($char,'`',strip_tags($row['id'])).'", 
-			"nama": "'.str_replace($char,'`',strip_tags($row['nama'])).'"
-		},';
+		while ($row = mysqli_fetch_array($query)){
+			$char ='"';
+
+			$json .= '{
+				"id": "'.str_replace($char,'`',strip_tags($row['id'])).'",
+				"nama": "'.str_replace($char,'`',strip_tags($row['nama'])).'"
+			},';
+		}
+
+		$json = substr($json,0,strlen($json)-1);
+
+		$json .= ']}';
+
+	} else {
+		$json = '{"value":0, "message": "Data tidak ditemukan."}';
 	}
-
-	$json = substr($json,0,strlen($json)-1);
-	
-	$json .= ']}';
 
 	echo $json;
 

@@ -3,7 +3,7 @@
 	$server		= "localhost"; //sesuaikan dengan nama server
 	$user		= "root"; //sesuaikan username
 	$password	= "enter"; //sesuaikan password
-	$database	= "kuncoro_search_view"; //sesuaikan target databese
+	$database	= "kuncoro_search_view"; //sesuaikan target database
 
 	$con = mysqli_connect($server, $user, $password, $database);
 	if (mysqli_connect_errno()) {

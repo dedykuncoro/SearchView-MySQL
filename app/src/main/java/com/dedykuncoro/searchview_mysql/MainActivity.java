@@ -49,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     public static final String TAG_ID = "id";
     public static final String TAG_NAMA = "nama";
     public static final String TAG_RESULTS = "results";
+    public static final String TAG_MESSAGE = "message";
+    public static final String TAG_VALUE = "value";
 
     String tag_json_obj = "json_obj_req";
 
@@ -168,18 +170,25 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                 try {
                     JSONObject jObj = new JSONObject(response);
 
-                    String getObject = jObj.getString(TAG_RESULTS);
-                    JSONArray jsonArray = new JSONArray(getObject);
+                    int value = jObj.getInt(TAG_VALUE);
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        JSONObject obj = jsonArray.getJSONObject(i);
+                    if (value == 1) {
+                        String getObject = jObj.getString(TAG_RESULTS);
+                        JSONArray jsonArray = new JSONArray(getObject);
 
-                        DataModel data = new DataModel();
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            JSONObject obj = jsonArray.getJSONObject(i);
 
-                        data.setId(obj.getString(TAG_ID));
-                        data.setNama(obj.getString(TAG_NAMA));
+                            DataModel data = new DataModel();
 
-                        listData.add(data);
+                            data.setId(obj.getString(TAG_ID));
+                            data.setNama(obj.getString(TAG_NAMA));
+
+                            listData.add(data);
+                        }
+
+                    } else {
+                        Toast.makeText(getApplicationContext(), jObj.getString(TAG_MESSAGE), Toast.LENGTH_SHORT).show();
                     }
 
                 } catch (JSONException e) {
