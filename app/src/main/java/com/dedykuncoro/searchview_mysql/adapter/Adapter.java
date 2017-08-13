@@ -1,4 +1,4 @@
-package com.dedykuncoro.searchview_mysql.Adapter;
+package com.dedykuncoro.searchview_mysql.adapter;
 
 import android.app.Activity;
 import android.content.Context;

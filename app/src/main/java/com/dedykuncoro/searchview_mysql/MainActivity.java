@@ -17,7 +17,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
-import com.dedykuncoro.searchview_mysql.Adapter.Adapter;
+import com.dedykuncoro.searchview_mysql.adapter.Adapter;
 import com.dedykuncoro.searchview_mysql.app.AppController;
 import com.dedykuncoro.searchview_mysql.model.DataModel;
 
@@ -153,9 +153,6 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
     }
 
     private void cariData(final String keyword) {
-        listData.clear();
-        adapter.notifyDataSetChanged();
-
         pDialog = new ProgressDialog(MainActivity.this);
         pDialog.setCancelable(false);
         pDialog.setMessage("Loading...");
@@ -173,6 +170,9 @@ public class MainActivity extends AppCompatActivity implements SwipeRefreshLayou
                     int value = jObj.getInt(TAG_VALUE);
 
                     if (value == 1) {
+                        listData.clear();
+                        adapter.notifyDataSetChanged();
+
                         String getObject = jObj.getString(TAG_RESULTS);
                         JSONArray jsonArray = new JSONArray(getObject);
 
